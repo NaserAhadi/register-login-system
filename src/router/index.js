@@ -13,10 +13,12 @@ Vue.use(VueRouter)
   {
     path: '/retrieval-password',
     name: 'RetrievalPassword',
-    // route level code-splitting
-    // this generates a separate chunk (retrieval-password.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "retrieval-password" */ '../views/RetrievalPassword/RetrievalPassword.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import(/* webpackChunkName: "register" */ '../views/Register/Register.vue')
   }
 ]
 
