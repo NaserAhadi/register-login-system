@@ -9,6 +9,12 @@ import store from '@/store/store'
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 
+const globalComponents = {
+  'BaseSnackbar':   () => import('@/components/BaseSnackbar/BaseSnackbar'),
+}
+
+Object.entries(globalComponents).forEach(([name, component]) => Vue.component(name, component))
+
 new Vue({
   vuetify,
   router,

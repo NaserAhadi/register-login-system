@@ -12,6 +12,7 @@
     <router-link :to="{name:'Login'}">
       {{ persianLanguageResource.doLogin }}
     </router-link>
+    <BaseSnackbar :timeout="7000" />
   </v-form>
 </template>
 

@@ -16,7 +16,9 @@ export const mutations = {
 
 export const actions = {
     async checkUserRegistering(vuexContext, userPhoneNumberPayload){
-        await registerService.httpCheckRegistering(userPhoneNumberPayload)
+        const { data:{ message } } = await registerService.httpCheckRegistering(userPhoneNumberPayload)
+        const snackbarConfig ={message, toggle: true}
+        vuexContext.dispatch('global/triggerSnackbar',snackbarConfig, {root: true})
         vuexContext.commit('SET_USER_PHONE_NUMBER',userPhoneNumberPayload.mobile)
     }
 }
