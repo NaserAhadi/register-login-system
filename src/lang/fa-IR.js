@@ -6,5 +6,8 @@ export default{
     RetrievalPassword: 'بازیابی رمز عبور',
     newPassword: 'رمز عبور جدید',
     dontHaveAccount: 'حساب کاربری ندارید؟',
-    register: 'ثبت نام کنید'
+    register: 'ثبت نام کنید',
+    haveAccount: 'حساب کاربری دارید',
+    doLogin: 'وارد شوید',
+    submit: 'ارسال'
 }
