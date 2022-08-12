@@ -17,42 +17,10 @@
       :placeholder="persianLanguageResource.newPassword"
       :is-password-field="true"
     />
-    <div class="change-password-conditions"> 
-      <span class="condition-item">
-        {{ persianLanguageResource.atleastEightCharacter }}
-        <CloseSvg
-          v-if="password.length>0 && !hasPasswordEightCharacters"
-          class="close-svg"
-        />
-        <DoneSvg
-          v-else-if="password.length>0 && hasPasswordEightCharacters"
-          class="done-svg"
-        />
-      </span>
-      <span class="condition-item">
-        {{ persianLanguageResource.atleastOneNumber }}
-
-        <CloseSvg
-          v-if="password.length>0 && !hasPasswordAtleastOneNumber"
-          class="close-svg"
-        />
-        <DoneSvg
-          v-else-if="password.length>0 && hasPasswordAtleastOneNumber"
-          class="done-svg"
-        />
-      </span>
-      <span class="condition-item">
-        {{ persianLanguageResource.atleastOneBigCharacter }}
-        <CloseSvg
-          v-if="password.length>0 && !hasPasswordAtleastOneBigChar"
-          class="close-svg"
-        />
-        <DoneSvg
-          v-else-if="password.length>0 && hasPasswordAtleastOneBigChar"
-          class="done-svg"
-        />
-      </span>
-    </div>
+    <PasswordValidations
+      :password="password"
+      @check-pass-conditions="checkPasswordValidatioins($event)"
+    />
     <BaseButton
       class="primary-button"
       type="submit"
@@ -75,23 +43,19 @@
     import {getItemFromLocalStorage} from '@/util/localstorageFunctions.js'
     import retrievalService from '@/services/retrievalService.js'
     import { mapActions } from 'vuex'
-    import DoneSvg from '@/assets/svg/done.svg'
-    import CloseSvg from '@/assets/svg/close.svg'
+    import PasswordValidations from '@/components/PasswordValidation/PasswordValidations'
 
     export default {
         name: 'RetrievalPassword',
         components:{
-            DoneSvg,
-            CloseSvg
+            PasswordValidations
         },
         data(){
             return {
                 persianLanguageResource,
                 password: '',
                 isOpenOtpModal: false,
-                hasPasswordEightCharacters: false,
-                hasPasswordAtleastOneNumber: false,
-                hasPasswordAtleastOneBigChar: false
+                isPasswordValid: false
             }
         },
         computed:{
@@ -101,21 +65,13 @@
             },
           }
         },
-       watch:{
-          password(val){
-            this.checkHasAtleastEightChar(val)
-            this.checkHasAtleastOneNumber(val)
-            this.checkHasAtleastOneUppercase(val)
-          }
-       },
         methods:{
           ...mapActions('global', ['triggerSnackbar']),
-
           cancelRetrievalPassword(){
             this.$router.push({name: 'Login'})
           },
           async changePassword(){
-            if(this.hasPasswordEightCharacters && this.hasPasswordAtleastOneNumber && this.hasPasswordAtleastOneBigChar){
+            if(this.isPasswordValid){
               try{
                   const retrievalInfo = {
                     mobile: getItemFromLocalStorage('phoneNumber'),
@@ -126,7 +82,7 @@
                   const snackbarConfig = {message,status, toggle: true}
                   this.triggerSnackbar(snackbarConfig)
                   if(status===1){
-                     this.isOpenOtpModal = true
+                     this.openOtpModal()
                   }
               } catch(error){
                 console.log(error);
@@ -156,34 +112,17 @@
               this.triggerSnackbar(snackbarConfig)
             }
           },
+          openOtpModal(){
+            this.isOpenOtpModal = true
+          },
           closeOtpModal(){
             this.isOpenOtpModal = false
           },
-          checkHasAtleastEightChar(val){
-            if(val.length>=8){
-              this.hasPasswordEightCharacters = true
-            } else {
-              this.hasPasswordEightCharacters = false
-            }
-          },
-          checkHasAtleastOneNumber(val){
-            const regexForAtleastOneNumber = /\d/;
-            if(regexForAtleastOneNumber.test(val)){
-              this.hasPasswordAtleastOneNumber = true
-            } else{
-              this.hasPasswordAtleastOneNumber = false
-            }
-          },
-          checkHasAtleastOneUppercase(val){
-           const regexForAtleastOneBigCharacter = /(?=.*[A-Z])/
-              if(regexForAtleastOneBigCharacter.test(val)){
-                this.hasPasswordAtleastOneBigChar = true
-              } else{
-                this.hasPasswordAtleastOneBigChar = false
-              }
-        },
         navigateToRegisterPage(){
           this.$router.push({name: 'Register'})
+        },
+        checkPasswordValidatioins(val){
+          this.isPasswordValid = val
         }
     }
   }
