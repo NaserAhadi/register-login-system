@@ -18,5 +18,9 @@ export default{
     cancel: 'انصراف',
     loginPage: 'صفحه ورود',
     enterOtp: 'کد ارسال شده را وارد کنید',
-    successChangePassword: 'رمز عبور با موفقیت تغییر یافت'
+    successChangePassword: 'رمز عبور با موفقیت تغییر یافت',
+    atleastEightCharacter: 'حداقل 8 کارکتر',
+    atleastOneNumber: 'حاوی حداقل یک عدد',
+    atleastOneBigCharacter: 'حاوی حداقل یک حرف بزرگ',
+    enterProperPassword: 'رمز عبور صحیح وارد کنید'
 }
