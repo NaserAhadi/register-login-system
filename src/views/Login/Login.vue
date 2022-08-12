@@ -31,7 +31,7 @@
 <script>
     import persianLanguageResource from '@/lang/fa-IR.js'
     import loginService from '@/services/loginService.js'
-    import {mapState,mapActions} from 'vuex'
+    import {mapActions} from 'vuex'
     import {setItemsOnLocalStorage} from '@/util/localstorageFunctions.js'
     export default {
         name: 'Login',
@@ -40,9 +40,6 @@
                 persianLanguageResource,
                 password:'',
             }
-        },
-        computed:{
-          ...mapState('register', ['userPhoneNumber'])
         },
         methods:{
           ...mapActions('global', ['triggerSnackbar']),
@@ -60,6 +57,8 @@
                   setItemsOnLocalStorage('refresh_token', data.refresh_token)
                   setItemsOnLocalStorage('token_type', data.token_type)
                   setItemsOnLocalStorage('exporation', data.expires_in)
+                  const snackbarConfig = { message: persianLanguageResource.welcome, color: '#46CAC0', toggle: true}
+                  this.triggerSnackbar(snackbarConfig)
               } catch(error){
                   const snackbarConfig = { message: error.response.data.error, color: '#FF3D00', toggle: true}
                   this.triggerSnackbar(snackbarConfig)

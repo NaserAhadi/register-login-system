@@ -9,14 +9,9 @@ export default{
     RetrievalPassword: 'بازیابی رمز عبور',
     enterYourPassword: 'رمز عبور خود را وارد کنید',
     enterNewPassword: 'رمز عبور جدید را وارد کنید',
-    dontHaveAccount: 'حساب کاربری ندارید؟',
-    register: 'ثبت نام کنید',
-    haveAccount: 'حساب کاربری دارید',
-    doLogin: 'وارد شوید',
     submit: 'ارسال',
     otp: 'کد ارسال شده را وارد کنید',
     cancel: 'انصراف',
-    loginPage: 'صفحه ورود',
     enterOtp: 'کد ارسال شده را وارد کنید',
     successChangePassword: 'رمز عبور با موفقیت تغییر یافت',
     atleastEightCharacter: 'حداقل 8 کارکتر',
@@ -31,5 +26,6 @@ export default{
     enterYourFirstName: '(حداقل 3 کارکتر و حداکثر 30)نام خود را وارد کنید',
     enterYourLastName: '(حداقل 3 کارکتر و حداکثر 40)نام خانوادگی خود را وارد کنید',
     enterNationalCode: '(10 رقم)کد ملی خود را وارد کنید',
-    successRegistering: 'اطلاعات شما با موفقیت ثیت شد'
+    successRegistering: 'اطلاعات شما با موفقیت ثیت شد',
+    welcome: 'خوش آمدید'
 }

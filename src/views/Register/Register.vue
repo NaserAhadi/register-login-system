@@ -52,7 +52,6 @@
           }
         },
         methods:{
-          ...mapActions('register', ['checkUserRegistering', 'verifyOtp', 'setUserPhoneNumber']),
           ...mapActions('global', ['triggerSnackbar']),
             async submitPhoneNumber(){
                 const reg = new RegExp('^[0-9]+$');
