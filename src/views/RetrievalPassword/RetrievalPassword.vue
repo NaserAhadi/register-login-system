@@ -149,6 +149,7 @@
                 const snackbarConfig = {message:persianLanguageResource.successChangePassword, toggle: true}
                 this.triggerSnackbar(snackbarConfig)
                 this.closeOtpModal()
+                this.navigateToRegisterPage()
               }
            } catch(error){
               const snackbarConfig = {message:error.response.data.error,status:error.response.data.status, toggle: true}
@@ -180,6 +181,9 @@
               } else{
                 this.hasPasswordAtleastOneBigChar = false
               }
+        },
+        navigateToRegisterPage(){
+          this.$router.push({name: 'Register'})
         }
     }
   }
