@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -11,5 +11,13 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  width: 700px;
+  background: #F5F5F5;
+  display: flex;
+  margin: 4rem auto 0;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  border-radius: 0.5rem;
 }
 </style>
