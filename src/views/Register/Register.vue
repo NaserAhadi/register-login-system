@@ -1,17 +1,25 @@
 <template>
-  <v-form @submit.prevent="submitPhoneNumber()">
-    <v-text-field
+  <v-form
+    class="register-form"
+    @submit.prevent="submitPhoneNumber()"
+  >
+    <p class="title">
+      {{ persianLanguageResource.enterYourPhoneNumber }}
+    </p>
+    <BaseTextfield
       v-model="phoneNumber"
-      :label="persianLanguageResource.phoneNumber"
-      outlined
+      placeholder="09XXXXXXXXX"
+      :max-length-value="11"
+      hint="شماره موبایل 11 رقمی وارد کنید"
     />
-    <v-btn type="submit">
+
+    <BaseButton
+      type="submit"
+      class="primary-button"
+    >
       {{ persianLanguageResource.submit }}
-    </v-btn>
-    <span>{{ persianLanguageResource.haveAccount }}</span>
-    <router-link :to="{name:'Login'}">
-      {{ persianLanguageResource.doLogin }}
-    </router-link>
+    </BaseButton><br>
+
     <BaseSnackbar :timeout="7000" />
     <OtpModal
       v-model="isOpenOtpModal"
@@ -23,13 +31,16 @@
 <script>
     import persianLanguageResource from '@/lang/fa-IR.js'
     import { mapActions, mapState } from 'vuex'
+    import registerService from '@/services/registerService.js'
+    import {getItemFromLocalStorage} from '@/util/localstorageFunctions.js'
+
     export default {
         name: 'Register',
         data(){
             return{
                 persianLanguageResource,
                 phoneNumber:'',
-                isOpenOtpModal: false
+                isOpenOtpModal: false,
             }
         },
         computed:{
@@ -40,28 +51,79 @@
             if(val.message==='SMS Send'){
               this.isOpenOtpModal = true
             }
+          },
+        },
+        mounted(){
+          if(getItemFromLocalStorage('phoneNumber')){
+            this.phoneNumber = getItemFromLocalStorage('phoneNumber')
           }
         },
         methods:{
-          ...mapActions('register', ['checkUserRegistering', 'verifyOtp']),
-            submitPhoneNumber(){
-                const payload = {
-                  mobile: this.phoneNumber
+          ...mapActions('register', ['checkUserRegistering', 'verifyOtp', 'setUserPhoneNumber']),
+          ...mapActions('global', ['triggerSnackbar']),
+            async submitPhoneNumber(){
+                const reg = new RegExp('^[0-9]+$');
+                if(reg.test(this.phoneNumber)){
+                  const payload = {
+                    mobile: this.phoneNumber
+                  }
+                  try{
+                    const { data:{ message, status } } = await registerService.httpCheckRegistering(payload)
+                    console.log(message);
+                    if(status===0){
+                      this.$router.push({name:'Login'})
+                      localStorage.setItem('phoneNumber', this.phoneNumber)
+                    } else if(status===1){
+                      const snackbarConfig = {message:persianLanguageResource.sendMessage, toggle: true}
+                      this.triggerSnackbar(snackbarConfig)
+                      this.openOtpModal()
+                    } else{
+                      const snackbarConfig = {message:persianLanguageResource.notValidNumber, toggle: true}
+                      this.triggerSnackbar(snackbarConfig)
+                    }
+                  } catch(error){
+                    console.log(error);
+                  }
+                } else {
+                  const snackbarConfig = {message: persianLanguageResource.justUseNumber, toggle: true}
+                  this.triggerSnackbar(snackbarConfig)
                 }
-                this.checkUserRegistering(payload)
             },
-            submitOtp(otp){
-              const payload={
-                Key:otp,
-                Mobile: this.phoneNumber,
-                Scope: 'Register'
+            async submitOtp(otp){
+              try{
+                const otpPayload={
+                  key:otp,
+                  mobile: this.phoneNumber,
+                  scope: 'Register'
+                }
+                await registerService.httpVerifyOtp(otpPayload)
+                this.navigateToSettingInformation()
+              } catch(error){
+                  const snackbarConfig = { message: error.response.data.error, toggle: true}
+                  this.triggerSnackbar(snackbarConfig)
               }
-              this.verifyOtp(payload)
+            
+            },
+            openOtpModal(){
+              this.isOpenOtpModal = true
+            },
+            closeOtpModal(){
+              this.isOpenOtpModal = false
+            },
+            navigateToSettingInformation(){
+              this.$router.push({name: 'RegisterInfo'})
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
+.register-form{
+  padding: 1rem;
+}
 
+.title{
+  text-align: center;
+  margin: 1rem 0;
+}
 </style>
