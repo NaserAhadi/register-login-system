@@ -12,6 +12,7 @@ Vue.use(VueAxios, axios)
 const globalComponents = {
   'BaseSnackbar':   () => import('@/components/BaseSnackbar/BaseSnackbar'),
   'OtpModal':   () => import('@/components/OtpModal/OtpModal'),
+  'BaseButton':   () => import('@/components/BaseButton/BaseButton'),
 }
 
 Object.entries(globalComponents).forEach(([name, component]) => Vue.component(name, component))
