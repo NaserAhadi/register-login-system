@@ -6,6 +6,9 @@
     filled
     :maxlength="maxLengthValue"
     v-bind="$attrs"
+    :type="isPasswordField?(show ? 'text' : 'password'): 'text'"
+    :append-icon="isPasswordField ? (show ? 'mdi-eye' : 'mdi-eye-off'): ''"
+    @click:append="show = !show"
   />
 </template>
 
@@ -22,9 +25,18 @@
                 default: ''
             },
             maxLengthValue: {
-			type: Number,
-			default: 100,
+                type: Number,
+                default: 100,
+            },
+            isPasswordField:{
+                type:Boolean,
+                default: false
+            }
         },
+        data(){
+            return {
+              show: false
+            }
         },
         computed:{
             textfieldModel:{
@@ -47,6 +59,7 @@
                 border-radius: 0.5rem !important;
                 max-height: 56px;
                 margin: 0 !important;
+                width: 400px;
             
                 &::before,&::after{
                     border: 0px !important;
