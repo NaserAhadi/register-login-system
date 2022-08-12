@@ -27,6 +27,7 @@
 .button{
     width: 120px;
     padding: 0.5rem !important;
+    margin: 0.5rem;
 }
 
 .secondary-button{
