@@ -32,7 +32,7 @@
     import persianLanguageResource from '@/lang/fa-IR.js'
     import { mapActions, mapState } from 'vuex'
     import registerService from '@/services/registerService.js'
-    import {getItemFromLocalStorage} from '@/util/localstorageFunctions.js'
+    import {setItemsOnLocalStorage, getItemFromLocalStorage} from '@/util/localstorageFunctions.js'
 
     export default {
         name: 'Register',
@@ -45,13 +45,6 @@
         },
         computed:{
           ...mapState('global', ['snackbarConfig'])
-        },
-        watch:{
-          snackbarConfig(val){
-            if(val.message==='SMS Send'){
-              this.isOpenOtpModal = true
-            }
-          },
         },
         mounted(){
           if(getItemFromLocalStorage('phoneNumber')){
@@ -70,12 +63,14 @@
                   try{
                     const { data:{ message, status } } = await registerService.httpCheckRegistering(payload)
                     console.log(message);
+                    localStorage.clear()
                     if(status===0){
                       this.$router.push({name:'Login'})
-                      localStorage.setItem('phoneNumber', this.phoneNumber)
+                      setItemsOnLocalStorage('phoneNumber', this.phoneNumber)
                     } else if(status===1){
                       const snackbarConfig = {message:persianLanguageResource.sendMessage, toggle: true}
                       this.triggerSnackbar(snackbarConfig)
+                      setItemsOnLocalStorage('phoneNumber', this.phoneNumber)
                       this.openOtpModal()
                     } else{
                       const snackbarConfig = {message:persianLanguageResource.notValidNumber, toggle: true}
