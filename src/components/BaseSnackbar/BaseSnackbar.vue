@@ -21,12 +21,6 @@
     import {mapState, mapActions} from 'vuex'
     export default {
         name:'BaseSnackbar',
-        props:{
-            modelValue:{
-                type: String,
-                default: ''
-            } 
-        },
         computed:{
             ...mapState('global', ['snackbarConfig']),
             snackbar:{
