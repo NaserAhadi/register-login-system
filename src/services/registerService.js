@@ -1,10 +1,10 @@
 import { apiService } from "./apiService"
 
 export default {
-    httpCheckRegistering(userPhoneNumber){
-        return apiService.post('register/check/mobile', userPhoneNumber)
+    httpCheckRegistering(userPhoneNumberPayload){
+        return apiService.post('register/check/mobile', userPhoneNumberPayload)
     },
-    httpVerify(){
-        return apiService.post('/mobile/verify')
+    httpVerifyOtp(otpPayload){
+        return apiService.post('/mobile/verify',otpPayload)
     },
 }

@@ -13,7 +13,10 @@
       {{ persianLanguageResource.doLogin }}
     </router-link>
     <BaseSnackbar :timeout="7000" />
-    <OtpModal v-model="isOpenOtpModal" />
+    <OtpModal
+      v-model="isOpenOtpModal"
+      @submit="submitOtp($event)"
+    />
   </v-form>
 </template>
 
@@ -40,12 +43,20 @@
           }
         },
         methods:{
-          ...mapActions('register', ['checkUserRegistering']),
+          ...mapActions('register', ['checkUserRegistering', 'verifyOtp']),
             submitPhoneNumber(){
                 const payload = {
                   mobile: this.phoneNumber
                 }
                 this.checkUserRegistering(payload)
+            },
+            submitOtp(otp){
+              const payload={
+                Key:otp,
+                Mobile: this.phoneNumber,
+                Scope: 'Register'
+              }
+              this.verifyOtp(payload)
             }
         }
     }

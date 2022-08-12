@@ -54,8 +54,9 @@
             this.$emit('input', false)
           },
           submitOtp(){
+            this.$emit('submit', this.otp)
             console.log('submit this.otp',this.otp);
-            this.$emit('input', false)
+            // this.closeModal()
           }
         }
     }
