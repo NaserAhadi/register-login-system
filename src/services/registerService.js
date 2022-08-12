@@ -7,4 +7,7 @@ export default {
     httpVerifyOtp(otpPayload){
         return apiService.post('v2/mobile/verify',otpPayload)
     },
+    httpRegisterInformation(registerInfotmation){
+        return apiService.post('v2/register',registerInfotmation)
+    },
 }

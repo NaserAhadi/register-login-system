@@ -28,8 +28,8 @@ export default{
     notValidNumber: 'شماره معتبر نیست',
     sendMessage: 'کد تایید به شماره همراه ارسال شد',
     setInformation:'(تکمیل تمام بخش ها الزامی است)اطلاعات زیر را وارد کنید',
-    enterYourFirstName: 'نام خود را وارد کنید',
-    enterYourLastName: 'نام خانوادگی خود را وارد کنید',
-    enterNationalCode: 'کد ملی خود را وارد کنید',
-
+    enterYourFirstName: '(حداقل 3 کارکتر و حداکثر 30)نام خود را وارد کنید',
+    enterYourLastName: '(حداقل 3 کارکتر و حداکثر 40)نام خانوادگی خود را وارد کنید',
+    enterNationalCode: '(10 رقم)کد ملی خود را وارد کنید',
+    successRegistering: 'اطلاعات شما با موفقیت ثیت شد'
 }
