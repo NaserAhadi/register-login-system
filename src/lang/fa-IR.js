@@ -22,5 +22,14 @@ export default{
     atleastEightCharacter: 'حداقل 8 کارکتر',
     atleastOneNumber: 'حاوی حداقل یک عدد',
     atleastOneBigCharacter: 'حاوی حداقل یک حرف بزرگ',
-    enterProperPassword: 'رمز عبور صحیح وارد کنید'
+    enterProperPassword: 'رمز عبور صحیح وارد کنید',
+    enterYourPhoneNumber: 'شماره همراه خود را وارد کنید',
+    justUseNumber: 'فقط مجاز به استفاده از اعداد هستید',
+    notValidNumber: 'شماره معتبر نیست',
+    sendMessage: 'کد تایید به شماره همراه ارسال شد',
+    setInformation:'(تکمیل تمام بخش ها الزامی است)اطلاعات زیر را وارد کنید',
+    enterYourFirstName: 'نام خود را وارد کنید',
+    enterYourLastName: 'نام خانوادگی خود را وارد کنید',
+    enterNationalCode: 'کد ملی خود را وارد کنید',
+
 }
