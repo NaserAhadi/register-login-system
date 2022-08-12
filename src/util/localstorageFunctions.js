@@ -1,7 +1,7 @@
 export function setItemsOnLocalStorage(key, value){
-    localStorage.setItem(key, value)
+    return localStorage.setItem(key, value)
 }
 
-export function getItemOnLocalStorage(key){
-    localStorage.getItem(key)
+export function getItemFromLocalStorage(key){
+    return localStorage.getItem(key)
 }
