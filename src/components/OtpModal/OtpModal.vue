@@ -1,8 +1,13 @@
 <template>
   <div data-app>
     <v-dialog v-model="dialog">
-      <BaseTextfield
-        v-model.number="otp"
+      <p class="otp-modal-title">
+        {{ persianLanguageResource.enterOtp }}
+      </p>
+      <v-otp-input
+        v-model="otp"
+        length="5"
+        type="number"
         :label="persianLanguageResource.otp"
       />
       <section class="buttons-wrapper">
@@ -50,12 +55,10 @@
         },
         methods:{
           closeModal(){
-            console.log('this.otp',this.otp);
             this.$emit('input', false)
           },
           submitOtp(){
             this.$emit('submit', this.otp)
-            console.log('submit this.otp',this.otp);
             // this.closeModal()
           }
         }
@@ -64,7 +67,7 @@
 
 <style lang="scss" scoped>
 :deep .v-dialog{
-  width: 560px;
+  width: 430px;
   background: #fff;
   border-radius: 8px;
   padding: 16px;
@@ -73,5 +76,11 @@
 .buttons-wrapper{
   display: flex;
   justify-content: flex-start;
+}
+
+.otp-modal-title{
+  margin: 0.5rem 0;
+  text-align: right;
+  padding: 0 0.6rem;
 }
 </style>
