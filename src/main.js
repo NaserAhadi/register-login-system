@@ -13,6 +13,7 @@ const globalComponents = {
   'BaseSnackbar':   () => import('@/components/BaseSnackbar/BaseSnackbar'),
   'OtpModal':   () => import('@/components/OtpModal/OtpModal'),
   'BaseButton':   () => import('@/components/BaseButton/BaseButton'),
+  'BaseTextfield':   () => import('@/components/BaseTextfield/BaseTextfield'),
 }
 
 Object.entries(globalComponents).forEach(([name, component]) => Vue.component(name, component))
