@@ -31,6 +31,10 @@
             isPasswordField:{
                 type:Boolean,
                 default: false
+            },
+            value:{
+                type: String,
+                default: ''
             }
         },
         data(){
