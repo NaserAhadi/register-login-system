@@ -1,26 +1,30 @@
 <template>
   <v-snackbar
     v-model="snackbar"
+    class="snackbar"
+    :color="snackbarConfig.color? snackbarConfig.color: ''"
   >
     {{ snackbarConfig.message }}
 
     <template v-slot:action="{ attrs }">
-      <v-btn
-        color="pink"
-        text
+      <CloseSvg
         v-bind="attrs"
+        class="close-svg"
         @click="closeSnackbar()"
-      >
-        Close
-      </v-btn>
+      />
     </template>
   </v-snackbar>
 </template>
 
 <script>
     import {mapState, mapActions} from 'vuex'
+    import CloseSvg from '@/assets/svg/close.svg'
+
     export default {
         name:'BaseSnackbar',
+        components:{
+            CloseSvg
+        },
         computed:{
             ...mapState('global', ['snackbarConfig']),
             snackbar:{
@@ -44,5 +48,14 @@
 </script>
 
 <style lang="scss" scoped>
+.snackbar{
+  direction: rtl;
+}
 
+.close-svg{
+  margin-left: 0.5rem;
+  path{
+    stroke: #fff
+  }
+}
 </style>

@@ -1,13 +1,20 @@
 <template>
-  <v-form @submit.prevent="submitUserinfo()">
+  <v-form
+    class="login-form"
+    @submit.prevent="submitUserinfo()"
+  >
+    <p class="title">
+      {{ persianLanguageResource.enterYourPassword }}
+    </p>
     <BaseTextfield
       v-model="password"
-      hint="رمز عبور خود را وارد کنید"
+      :hint="persianLanguageResource.enterYourPassword"
       :is-password-field="true"
     />
     <router-link
       :to="{name:'RetrievalPassword'}"
       tag="span"
+      class="link"
     >
       {{ persianLanguageResource.RetrievalPassword }}
     </router-link>
@@ -23,7 +30,6 @@
 
 <script>
     import persianLanguageResource from '@/lang/fa-IR.js'
-    // import RetrievalPassword from '@/views/RetrievalPassword/RetrievalPassword'
     import loginService from '@/services/loginService.js'
     import {mapState,mapActions} from 'vuex'
     import {setItemsOnLocalStorage} from '@/util/localstorageFunctions.js'
@@ -35,9 +41,6 @@
                 password:'',
             }
         },
-        // components:{
-        //     RetrievalPassword
-        // },
         computed:{
           ...mapState('register', ['userPhoneNumber'])
         },
@@ -58,7 +61,7 @@
                   setItemsOnLocalStorage('token_type', data.token_type)
                   setItemsOnLocalStorage('exporation', data.expires_in)
               } catch(error){
-                  const snackbarConfig = { message: error.response.data.error, toggle: true}
+                  const snackbarConfig = { message: error.response.data.error, color: '#FF3D00', toggle: true}
                   this.triggerSnackbar(snackbarConfig)
               }
             },
@@ -67,5 +70,16 @@
 </script>
 
 <style lang="scss" scoped>
+.login-form{
+  padding: 1rem;
+}
 
+.title{
+  margin: 1rem 0;
+  color: #636363
+}
+
+.link{
+  cursor: pointer;
+}
 </style>

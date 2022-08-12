@@ -79,7 +79,7 @@
                     scope: 'ForgotPass'
                   }
                   const {data:{message, status}} = await retrievalService.httpSendRetrievalInfo(retrievalInfo)
-                  const snackbarConfig = {message,status, toggle: true}
+                  const snackbarConfig = {message,status,color:'46CAC0', toggle: true}
                   this.triggerSnackbar(snackbarConfig)
                   if(status===1){
                      this.openOtpModal()
@@ -89,7 +89,7 @@
               }
             } else {
               const snackbarConfig = {message:persianLanguageResource.enterProperPassword, toggle: true}
-                  this.triggerSnackbar(snackbarConfig)
+              this.triggerSnackbar(snackbarConfig)
             }
            
           },
@@ -102,13 +102,13 @@
                 }
               const {data:{status}} = await retrievalService.httpVerifyChangingPassword(retrievalInfo)
               if(status===1){
-                const snackbarConfig = {message:persianLanguageResource.successChangePassword, toggle: true}
+                const snackbarConfig = {message:persianLanguageResource.successChangePassword, color: '#46CAC0', toggle: true}
                 this.triggerSnackbar(snackbarConfig)
                 this.closeOtpModal()
                 this.navigateToRegisterPage()
               }
            } catch(error){
-              const snackbarConfig = {message:error.response.data.error,status:error.response.data.status, toggle: true}
+              const snackbarConfig = {message:error.response.data.error,status:error.response.data.status,color: '#FF3D00', toggle: true}
               this.triggerSnackbar(snackbarConfig)
             }
           },
