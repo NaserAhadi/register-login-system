@@ -1,15 +1,22 @@
 export default{
     login: 'ورود',
     phoneNumber:'شماره همراه',
+    phoneNumberWithExample:'09XXXXXXXXX - شماره همراه',
+    phoneNumberHint:'شماره موبایل 11 رقمی وارد کنید',
     password: 'رمز عبور',
+    newPassword: 'رمز عبور جدید',
     forgotPassword: 'رمز عبور خود را فرمواش کرده اید؟',
     RetrievalPassword: 'بازیابی رمز عبور',
-    newPassword: 'رمز عبور جدید',
+    enterYourPassword: 'رمز عبور خود را وارد کنید',
+    enterNewPassword: 'رمز عبور جدید را وارد کنید',
     dontHaveAccount: 'حساب کاربری ندارید؟',
     register: 'ثبت نام کنید',
     haveAccount: 'حساب کاربری دارید',
     doLogin: 'وارد شوید',
     submit: 'ارسال',
     otp: 'کد ارسال شده را وارد کنید',
-    cancel: 'انصراف'
+    cancel: 'انصراف',
+    loginPage: 'صفحه ورود',
+    enterOtp: 'کد ارسال شده را وارد کنید',
+    successChangePassword: 'رمز عبور با موفقیت تغییر یافت'
 }
